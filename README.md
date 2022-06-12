@@ -84,10 +84,6 @@ This program will read all the events saved on a Google Calendar you have access
 
 10. Run the following command in Terminal/Cmd: ```pip install -r requirements.txt ```
 
-## Change the Date Instructions
-Right now, this program will send an email with today's events. In order to change this, edit the number of days on line 4 in schedule.py. 
-* For instance, if you want to send tomorrow's events, change days = 1 instead of days = 0
-
 ## How to Run the Program
 1. Open Terminal (Mac) or Command Prompt (Windows)
 2. Navigate to this directory using cd commands
