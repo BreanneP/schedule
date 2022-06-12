@@ -70,8 +70,7 @@ This program will read all the events saved on a Google Calendar you have access
 
 4. In example.csv, change example@group.calendar.google.com to the calendar ID you just copied.
 
-5. Additionally, update example.csv to have the correct sender and receiver emails. 
-    * For instance, suppose I want my sender email to be example5@gmail.com. Change the first line to sender,example5@gmail.com. 
+5. Additionally, update example.csv to have the correct receiver emails. 
     * For more than 1 receiver email, put a space between the emails
 
 6. Rename example.csv to secrets.csv
@@ -98,7 +97,7 @@ This program will read all the events saved on a Google Calendar you have access
 * README.md is this file you're reading right now
 * requirements.txt contains all the requirements you will need for this program
 * schedule.py handles working with the Google Calendar API and creating the body of the email
-* secrets.csv contains sender and receiver emails as well as your calendar's ID
+* secrets.csv contains receiver emails as well as your calendar's ID
 
 ## Sources
 * [Gmail Send Example](https://stackoverflow.com/questions/37201250/sending-email-via-gmail-python

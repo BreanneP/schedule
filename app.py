@@ -61,5 +61,5 @@ if __name__ == '__main__':
     # send the message
     creds = get_creds('gmail-python-email-send.json', 'https://www.googleapis.com/auth/gmail.send')
     creds = creds.authorize(httplib2.Http())
-    send_emails(creds, secrets['sender'], secrets['receivers'], subject_line, html, message)
+    send_emails(creds, secrets['receivers'], subject_line, html, message)
     
