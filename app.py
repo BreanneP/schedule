@@ -42,8 +42,8 @@ def get_secrets():
 
 
 if __name__ == '__main__':
-    print("Do you want to send an email with events for the week or only tomorrow?")
-    email_format = input("Either submit week or tomorrow: ")
+    print("Do you want to send an email with events for the week, tomorrow, or the weekend?")
+    email_format = input("Either submit week, tomorrow, or weekend: ")
 
     # get secrets
     secrets = get_secrets()
@@ -54,6 +54,8 @@ if __name__ == '__main__':
     # get the message
     if email_format.lower() == 'week':
         message, html, subject = get_message(creds, secrets['calendar'], 7)
+    elif email_format.lower() == 'weekend':
+        message, html, subject = get_message(creds, secrets['calendar'], 2)
     else:
         message, html, subject = get_message(creds, secrets['calendar'], 1)
     subject_line = f"Events Scheduled for {subject}"

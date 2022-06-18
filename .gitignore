@@ -2,3 +2,4 @@ secrets.csv
 .DS_Store
 client_secret.json
 __pycache__
+pictures

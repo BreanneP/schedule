@@ -1,6 +1,8 @@
 import base64
+import csv
 import mimetypes
 import os
+import random
 from apiclient import errors, discovery
 from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
@@ -70,14 +72,37 @@ def send_message_internal(service, user_id, message, receiver):
     return 'OK'
 
 
-def send_message(creds, receiver, subject, msg_html, msg_plain):
+def get_used_images():
+    used_images = []
+    my_csv = csv.reader(open('pictures/used_images.csv'))
+    for row in my_csv:
+        used_images.append(row)
+    return used_images
+
+
+def get_image():
+    used_images = get_used_images()
+    image = random.randint(1, 82)
+    while str(image) in used_images:
+        image = random.randint(1, 82)
+
+    with open('pictures/used_images.csv', 'a', newline='') as f_object:
+        writer_object = csv.writer(f_object)
+        writer_object.writerow([image])
+        f_object.close()
+    
+    return f'pictures/{image}.jpg'
+
+
+def send_message(creds, receiver, subject, msg_html, msg_plain, image):
     service = discovery.build('gmail', 'v1', http=creds)
-    message = create_message(receiver, subject, msg_html, msg_plain)
+    message = create_message_with_file(receiver, subject, msg_html, msg_plain, image)
     result = send_message_internal(service, 'me', message, receiver)
     return result
 
 
 def send_emails(creds, receivers, subject, msg_html, msg_plain):
     receivers = receivers.split(' ')
+    image = get_image()
     for email in receivers:
-        send_message(creds, email, subject, msg_html, msg_plain)
+        send_message(creds, email, subject, msg_html, msg_plain, image)
