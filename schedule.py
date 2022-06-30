@@ -77,6 +77,8 @@ def get_message(creds, cal_id, num_days):
 
     if num_days == 1:
         subject = get_subject(num_days)
+    elif num_days == 2:
+        subject = 'This Weekend'
     else:
         subject = 'This Week'
 
