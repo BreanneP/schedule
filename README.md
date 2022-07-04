@@ -8,7 +8,7 @@ This program will read all the events saved on a Google Calendar you have access
 
 1. Sign in to your gmail that contains the calendar you will use.
 
-2. Navigate to [Google Console](https://console.cloud.google.com/welcome?project=testing-352419)
+2. Navigate to [Google Console](https://console.cloud.google.com)
 
 3. To the right of Google Cloud Platform, click New Project
 
