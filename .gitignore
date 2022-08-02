@@ -1,5 +1,5 @@
-secrets.csv
+secrets*
 .DS_Store
-client_secret.json
+client_secret*
 __pycache__
 pictures

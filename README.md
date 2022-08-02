@@ -52,9 +52,9 @@ This program will read all the events saved on a Google Calendar you have access
 
 22. In the popup screen that appears, click Download JSON.
 
-23. In your downloads, rename the file to client_secret.json.
+23. In your downloads, rename the file to client_secret_personal.json.
 
-24. Move client_secret.json to this directory.
+24. Move client_secret_personal.json to this directory.
 
 25. You are good to move on to the next steps below.
 
@@ -73,7 +73,7 @@ This program will read all the events saved on a Google Calendar you have access
 5. Additionally, update example.csv to have the correct receiver emails. 
     * For more than 1 receiver email, put a space between the emails
 
-6. Rename example.csv to secrets.csv
+6. Rename example.csv to secrets_personal.csv
 
 7. Make sure that Python3 is downloaded and up-to-date
 
@@ -89,15 +89,15 @@ This program will read all the events saved on a Google Calendar you have access
 3. Run the following command in Terminal/Cmd: ```python3 app.py```
 
 ## Files
-* .gitignore contains all the files that Github should not commit (it is important that you do not commit your client_secret.json or secrets.csv files)
+* .gitignore contains all the files that Github should not commit (it is important that you do not commit your client_secret_personal.json or secrets_personal.csv files)
 * app.py is the application that verifies credentials and calls the other files' functions
-* client_secret.json contains your Google OAuth client secrets
+* client_secret_personal.json contains your Google OAuth client secrets
 * emails.py handles working with the Gmail API and sending messages
 * example.csv is an example CSV file for what secret.csv should look like
 * README.md is this file you're reading right now
 * requirements.txt contains all the requirements you will need for this program
 * schedule.py handles working with the Google Calendar API and creating the body of the email
-* secrets.csv contains receiver emails as well as your calendar's ID
+* secrets_personal.csv contains receiver emails as well as your calendar's ID
 
 ## Sources
 * [Gmail Send Example](https://stackoverflow.com/questions/37201250/sending-email-via-gmail-python

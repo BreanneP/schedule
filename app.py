@@ -8,7 +8,7 @@ from oauth2client import client, tools, file
 from schedule import get_html, get_message
 
 
-client_secret_file = 'client_secret.json'
+client_secret_file = 'client_secret_personal.json'
 application_name = 'Gmail API Python Send Email'
 subject_line = 'Calendar Update for Tomorrow'
 
@@ -35,7 +35,7 @@ def get_creds(cred_file, scope):
 
 def get_secrets():
     secrets = {}
-    my_csv = csv.reader(open('secrets.csv'))
+    my_csv = csv.reader(open('secrets_personal.csv'))
     for row in my_csv:
         secrets[row[0]] = row[1]
     return secrets
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     secrets = get_secrets()
 
     # get calendar credentials
-    creds = get_creds('gmail-calendar.json', 'https://www.googleapis.com/auth/calendar.readonly')
+    creds = get_creds('calendar-personal.json', 'https://www.googleapis.com/auth/calendar.readonly')
 
     # get the message
     if email_format.lower() == 'week':
@@ -61,7 +61,7 @@ if __name__ == '__main__':
     subject_line = f"Events Scheduled for {subject}"
     
     # send the message
-    creds = get_creds('gmail-python-email-send.json', 'https://www.googleapis.com/auth/gmail.send')
+    creds = get_creds('gmail-personal.json', 'https://www.googleapis.com/auth/gmail.send')
     creds = creds.authorize(httplib2.Http())
     send_emails(creds, secrets['receivers'], subject_line, html, message)
     
