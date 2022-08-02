@@ -61,8 +61,12 @@ def get_events(creds, cal_id, num_days):
         summary = event['summary']
         message += f'<li><u>{start} - {end}</u>: {summary}'
 
-        if event.get('description', None):
-            message += f" ({event['description']})"
+        if event.get('location', None):
+            location = event['location']
+            if location.startswith('http'):
+                message += ' (Virtual)'
+            else:
+                message += f' ({location})'
         message += '</li>'
 
     return message
