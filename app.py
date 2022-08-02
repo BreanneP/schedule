@@ -49,7 +49,7 @@ if __name__ == '__main__':
     secrets = get_secrets()
 
     # get calendar credentials
-    creds = get_creds('calendar-personal.json', 'https://www.googleapis.com/auth/calendar.readonly')
+    creds = get_creds('calendar_personal.json', 'https://www.googleapis.com/auth/calendar.readonly')
 
     # get the message
     if email_format.lower() == 'week':
@@ -61,7 +61,7 @@ if __name__ == '__main__':
     subject_line = f"Events Scheduled for {subject}"
     
     # send the message
-    creds = get_creds('gmail-personal.json', 'https://www.googleapis.com/auth/gmail.send')
+    creds = get_creds('gmail_personal.json', 'https://www.googleapis.com/auth/gmail.send')
     creds = creds.authorize(httplib2.Http())
     send_emails(creds, secrets['receivers'], subject_line, html, message)
     
