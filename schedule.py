@@ -33,7 +33,7 @@ def convert_time(time):
     return time
 
 
-def get_subject(num_days):
+def get_formatted_date(num_days):
     date = datetime.date.today() + datetime.timedelta(days = num_days)
     month = int(str(date).split('-')[1])
     month = months[month]
@@ -76,18 +76,22 @@ def get_html(message):
     return message.replace('\n', '<br>')
 
 
-def get_message(creds, cal_id, num_days):
+def get_message(creds, cal_id):
     message = ''
+    tomorrow = get_formatted_date(1)
 
-    if num_days == 1:
-        subject = get_subject(num_days)
-    elif num_days == 2:
+    if tomorrow.startswith('Monday'):
+        num_days = 7
+        subject = 'This Week'
+    elif tomorrow.startswith('Saturday'):
+        num_days = 2
         subject = 'This Weekend'
     else:
-        subject = 'This Week'
+        num_days = 1
+        subject = tomorrow
 
     for day in range(1, num_days + 1):
-        message += f'<b>{get_subject(day)}</b>\n'
+        message += f'<b>{get_formatted_date(day)}</b>\n'
         message += f'<ul>{get_events(creds, cal_id, day)}</ul>\n'
 
     message = f"<font size='+1'>{message}</font>"

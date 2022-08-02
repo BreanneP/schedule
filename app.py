@@ -42,9 +42,6 @@ def get_secrets():
 
 
 if __name__ == '__main__':
-    print("Do you want to send an email with events for the week, tomorrow, or the weekend?")
-    email_format = input("Either submit week, tomorrow, or weekend: ")
-
     # get secrets
     secrets = get_secrets()
 
@@ -52,13 +49,8 @@ if __name__ == '__main__':
     creds = get_creds('calendar_personal.json', 'https://www.googleapis.com/auth/calendar.readonly')
 
     # get the message
-    if email_format.lower() == 'week':
-        message, html, subject = get_message(creds, secrets['calendar'], 7)
-    elif email_format.lower() == 'weekend':
-        message, html, subject = get_message(creds, secrets['calendar'], 2)
-    else:
-        message, html, subject = get_message(creds, secrets['calendar'], 1)
-    subject_line = f"Events Scheduled for {subject}"
+    message, html, subject = get_message(creds, secrets['calendar'])
+    subject_line = f'Events Scheduled for {subject}'
     
     # send the message
     creds = get_creds('gmail_personal.json', 'https://www.googleapis.com/auth/gmail.send')
