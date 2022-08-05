@@ -14,7 +14,8 @@ days = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday',
 def get_dates(num_days):
     t1 = datetime.time(hour = 0, minute = 0)
     t2 = datetime.time(hour = 23, minute = 59)
-    date = datetime.date.today() + datetime.timedelta(days = num_days)
+    today = datetime.datetime.utcnow() - datetime.timedelta(hours=local_to_utc)
+    date = today.date() + datetime.timedelta(days=num_days)
     start = datetime.datetime.combine(date, t1) + datetime.timedelta(hours=local_to_utc)
     end = datetime.datetime.combine(date, t2) + datetime.timedelta(hours=local_to_utc)
     start = start.isoformat() + 'Z'
@@ -34,19 +35,19 @@ def convert_time(time):
 
 
 def get_formatted_date(num_days):
-    date = datetime.date.today() + datetime.timedelta(days = num_days)
-    month = int(str(date).split('-')[1])
+    date = datetime.datetime.utcnow() - datetime.timedelta(hours=local_to_utc)
+    date = date + datetime.timedelta(days=num_days)
+    month = date.month
     month = months[month]
-    day = int(str(date).split('-')[2])
     day_of_week = date.weekday()
     day_of_week = days[day_of_week]
-    return f'{day_of_week}, {month} {day}'
+    return f'{day_of_week}, {month} {date.day}'
 
 
 def get_events(creds, cal_id, num_days):
     service = build('calendar', 'v3', credentials=creds)
     start, end = get_dates(num_days)
-    events_result = service.events().list(calendarId=cal_id, timeMin=start, timeMax=end, maxResults = 15, singleEvents = True, orderBy="startTime").execute()
+    events_result = service.events().list(calendarId=cal_id, timeMin=start, timeMax=end, maxResults=15, singleEvents=True, orderBy="startTime").execute()
     events = events_result.get('items', None)
 
     message = ''

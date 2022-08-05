@@ -1,5 +1,5 @@
 secrets*
 .DS_Store
-client_secret*
 __pycache__
 pictures
+schedule_app.app
