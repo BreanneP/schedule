@@ -7,10 +7,6 @@ from emails import send_emails
 from oauth2client import client, tools, file
 from schedule import get_html, get_message
 
-# TO DO LIST
-# 1. Figure out why pictures repeat
-# 2. Add more pictures to the pictures directory
-
 client_secret_file = 'secrets/client_secret_personal.json'
 application_name = 'Gmail API Python Send Email'
 subject_line = 'Calendar Update for Tomorrow'
