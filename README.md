@@ -103,8 +103,8 @@ This program will read all the events saved on a Google Calendar you have access
 11. Choose ```Calendar Alarm```
 12. Search for ```Launch Application``` and drag that into the workflow
 13. Next, click ```Other``` and choose the ```schedule_app.app``` application in this directory
-14. This should open up the Calendar with a new event. Change the frequency of the event and the time you want it to run at.
-15. The script will now run at those times assuming that Docker is always running
+14. This should open up the Calendar with a new event. Change the frequency of the event and the time you want it to run at
+15. The script will now run at those times assuming that Docker is running and that you are logged on at that time
 
 
 ## Files/Folders
