@@ -1,26 +1,23 @@
 import csv
 import httplib2
 import mimetypes
-import oauth2client
 import os
+import subprocess
+from shutil import copyfile
 from emails import send_emails
-from oauth2client import client, tools, file
 from schedule import get_html, get_message
 
-client_secret_file = 'secrets/client_secret_personal.json'
-application_name = 'Gmail API Python Send Email'
-subject_line = 'Calendar Update for Tomorrow'
 
+def get_creds(cred_path):
+    tmp_dir = '/tmp/secrets'
+    token_path = os.path.join(tmp_dir, cred_path.split('/')[1])
 
-def get_creds(cred_path, scope):
-    store = oauth2client.file.Storage(cred_path)
+    if not os.path.exists(tmp_dir):
+        os.makedirs(tmp_dir)
+    subprocess.run(["chmod", "755", str(tmp_dir)])
+    copyfile(cred_path, token_path)
+    store = oauth2client.file.Storage(token_path)
     credentials = store.get()
-    
-    if not credentials or credentials.invalid:
-        flow = client.flow_from_clientsecrets(client_secret_file, scope)
-        flow.user_agent = application_name
-        credentials = tools.run_flow(flow, store)
-        print('Storing credentials to ' + cred_path)
 
     return credentials
 
@@ -33,18 +30,18 @@ def get_secrets():
     return secrets
 
 
-if __name__ == '__main__':
+def run():
     # get secrets
     secrets = get_secrets()
 
     # get calendar credentials
-    creds = get_creds('secrets/calendar_personal.json', 'https://www.googleapis.com/auth/calendar.readonly')
+    creds = get_creds('secrets/calendar_personal.json')
 
     # get the message
     message, html, subject = get_message(creds, secrets['calendar'])
     subject_line = f'Events Scheduled for {subject}'
     
     # send the message
-    creds = get_creds('secrets/gmail_personal.json', 'https://www.googleapis.com/auth/gmail.send')
+    creds = get_creds('secrets/gmail_personal.json')
     creds = creds.authorize(httplib2.Http())
     send_emails(creds, secrets['receivers'], subject_line, html, message)

@@ -1,4 +1,0 @@
-#!/bin/sh
-cd Documents/schedule
-docker build -t schedule-app .
-docker run schedule-app

@@ -62,6 +62,10 @@ def get_events(creds, cal_id, num_days):
         summary = event['summary']
         message += f'<li><u>{start} - {end}</u>: {summary}'
 
+        description = event.get('description', None)
+        if description:
+            message += f' - {description}'
+
         if event.get('location', None):
             location = event['location']
             if location.startswith('http'):

@@ -72,25 +72,8 @@ def send_message_internal(service, user_id, message, receiver):
     return 'OK'
 
 
-def get_used_images():
-    used_images = []
-    my_csv = csv.reader(open('pictures/used_images.csv'))
-    for row in my_csv:
-        used_images.append(row)
-    return used_images
-
-
 def get_image():
-    used_images = get_used_images()
-    image = random.randint(1, 82)
-    while str(image) in used_images:
-        image = random.randint(1, 82)
-
-    with open('pictures/used_images.csv', 'a', newline='') as f_object:
-        writer_object = csv.writer(f_object)
-        writer_object.writerow([image])
-        f_object.close()
-    
+    image = random.randint(1, 312)
     return f'pictures/{image}.jpg'
 
 
