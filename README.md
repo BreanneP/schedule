@@ -61,31 +61,38 @@ This program will read all the events saved on a Google Calendar you have access
 
 
 ## Set Up Automation
-1. Make an AWS account with the free tier
-2. Navigate to the Lambda service on AWS
-3. Create a new function
+1. Make sure all the files in the ```secrets``` folder are accessible to everyone by running ```chmod 755 file_name``` on each file
+2. In Terminal, navigate to this directory and run the following command: ```pip install --target . google-api-python-client```
+3. Run this command as well: ```pip install --target . oauth2client```
+4. Next, zip the contents of this directory by running this command: ```zip -r package.zip .```
+5. Now, make an AWS account with the free tier
+6. Navigate to the Lambda service on AWS
+7. Create a new function
     * Choose ```Author from scratch```
     * You can pick your function name
     * Use ```Python 3.9``` for the Runtime
     * Use x86_64 architecture
-4. instructions here for zip folder
-
-7. Next, navigate to the EventBridge service in AWS
-8. Create a new Rule
+8. In the code section of the Lambda function, you should see an ```Upload from``` button.
+9. Click this button and choose ```.zip file```
+10. Choose the ```package.zip``` file
+    * Note: if your zip file is too large, you might have to upload it from S3 instead
+11. In Runtime settings, change the handler from ```lambda_function.lambda_handler``` to ```app.run```
+12. Next, navigate to the EventBridge service in AWS
+13. Create a new Rule
     * Name the rule whatever you want
     * Choose ```Schedule``` for Rule Type
-9. Choose the schedule you want the program to run on
-10. For Target, choose AWS service
-11. Search for ```Lambda function```
-12. Choose the lambda function you just created
-13. You can skip the tag section and create the rule
-14. Next, navigate back to the Lambda function you created
-15. In the function overview, you should see ```+Add Trigger```
-16. For source, select ```Eventbridge (CloudWatch Events)```
-17. Search existing rules and select the one you just created
-18. In the lambda function, click on ```Configuration```
-19. Then click on ```General Configuration``` and change the timeout to 30 seconds
-20. You should see the schedule run at the time you set it for
+14. Choose the schedule you want the program to run on
+15. For Target, choose AWS service
+16. Search for ```Lambda function```
+17. Choose the lambda function you just created
+18. You can skip the tag section and create the rule
+19. Next, navigate back to the Lambda function you created
+20. In the function overview, you should see ```+Add Trigger```
+21. For source, select ```Eventbridge (CloudWatch Events)```
+22. Search existing rules and select the one you just created
+23. In the lambda function, click on ```Configuration```
+24. Then click on ```General Configuration``` and change the timeout to 30 seconds
+25. Test out your changes in the Lambda function by making a test event in the Test tab
 
 
 ## Files/Folders

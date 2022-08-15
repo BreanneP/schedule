@@ -3,6 +3,8 @@ import httplib2
 import mimetypes
 import os
 import subprocess
+import oauth2client
+from oauth2client import client, tools, file
 from shutil import copyfile
 from emails import send_emails
 from schedule import get_html, get_message
@@ -30,7 +32,7 @@ def get_secrets():
     return secrets
 
 
-def run():
+def run(event, context):
     # get secrets
     secrets = get_secrets()
 
