@@ -2,7 +2,6 @@ import base64
 import csv
 import mimetypes
 import os
-import random
 from apiclient import errors, discovery
 from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
@@ -73,8 +72,12 @@ def send_message_internal(service, user_id, message, receiver):
 
 
 def get_image():
-    image = random.randint(1, 312)
-    return f'pictures/{image}.jpg'
+    if not os.getenv('PICTURE'):
+        os.environ['PICTURE'] = '1'
+    else:
+        os.environ['PICTURE'] = str(int(os.getenv('PICTURE')) + 1)
+    print(f"PICTURE IS {os.getenv('PICTURE')}")
+    return f"pictures/{os.getenv('PICTURE')}.jpg"
 
 
 def send_message(creds, receiver, subject, msg_html, msg_plain, image):
