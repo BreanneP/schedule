@@ -1,7 +1,6 @@
 import httplib2
 import oauth2client
 from oauth2client import client, tools, file
-from schedule import get_html, get_message
 
 client_secret_file = 'secrets/client_secret_personal.json'
 application_name = 'Gmail API Python Send Email'

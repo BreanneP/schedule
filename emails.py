@@ -3,7 +3,6 @@ import csv
 import mimetypes
 import os
 from apiclient import errors, discovery
-from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
