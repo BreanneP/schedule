@@ -70,15 +70,6 @@ def send_message_internal(service, user_id, message, receiver):
     return 'OK'
 
 
-def get_image():
-    if not os.getenv('PICTURE'):
-        os.environ['PICTURE'] = '1'
-    else:
-        os.environ['PICTURE'] = str(int(os.getenv('PICTURE')) + 1)
-    print(f"PICTURE IS {os.getenv('PICTURE')}")
-    return f"pictures/{os.getenv('PICTURE')}.jpg"
-
-
 def send_message(creds, receiver, subject, msg_html, msg_plain, image):
     service = discovery.build('gmail', 'v1', http=creds)
     message = create_message_with_file(receiver, subject, msg_html, msg_plain, image)
@@ -86,8 +77,7 @@ def send_message(creds, receiver, subject, msg_html, msg_plain, image):
     return result
 
 
-def send_emails(creds, receivers, subject, msg_html, msg_plain):
+def send_emails(creds, receivers, subject, msg_html, msg_plain, image):
     receivers = receivers.split(' ')
-    image = get_image()
     for email in receivers:
         send_message(creds, email, subject, msg_html, msg_plain, image)

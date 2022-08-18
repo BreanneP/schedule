@@ -1,3 +1,4 @@
+import csv
 import datetime
 from googleapiclient.discovery import build
 
@@ -81,9 +82,19 @@ def get_html(message):
     return message.replace('\n', '<br>')
 
 
+def get_image(tomorrow):
+    tomorrow = tomorrow.split(',')[1].strip()
+    print(tomorrow)
+    my_csv = csv.reader(open('pictures.csv'))
+    for row in my_csv:
+        if row[0] == tomorrow:
+            return f'pictures/{row[1]}.jpg'
+
+
 def get_message(creds, cal_id):
     message = ''
     tomorrow = get_formatted_date(1)
+    image = get_image(tomorrow)
 
     if tomorrow.startswith('Monday'):
         num_days = 7
@@ -101,4 +112,4 @@ def get_message(creds, cal_id):
 
     message = f"<font size='+1'>{message}</font>"
     html = get_html(message)
-    return message, html, subject
+    return message, html, subject, image

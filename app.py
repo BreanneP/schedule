@@ -40,10 +40,10 @@ def run(event, context):
     creds = get_creds('secrets/calendar_personal.json')
 
     # get the message
-    message, html, subject = get_message(creds, secrets['calendar'])
+    message, html, subject, image = get_message(creds, secrets['calendar'])
     subject_line = f'Events Scheduled for {subject}'
     
     # send the message
     creds = get_creds('secrets/gmail_personal.json')
     creds = creds.authorize(httplib2.Http())
-    send_emails(creds, secrets['receivers'], subject_line, html, message)
+    send_emails(creds, secrets['receivers'], subject_line, html, message, image)

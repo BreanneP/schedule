@@ -57,7 +57,8 @@ This program will read all the events saved on a Google Calendar you have access
 1. Make a ```pictures``` directory and move the pictures you want sent on a daily basis in this directory
 2. Rename them to start at ```1.jpg```, then ```2.jpg```, and so one
     * Important note: Make sure they are named ```.jpg``` not ```.JPG```
-3. You are good to move on to the next steps below
+3. Note: the pictures.csv file contains the dates each picture will be sent. For instance, if it's August 17 and I am sending a reminder for August 18, picture ```2.jpg``` will be sent on August 17
+4. You are good to move on to the next steps below
 
 
 ## Set Up Automation
@@ -103,6 +104,7 @@ This program will read all the events saved on a Google Calendar you have access
 * emails.py handles working with the Gmail API and sending messages
 * example.csv is an example CSV file for what secret.csv should look like
 * pictures folder contains the pictures that will randomly be added to the daily emails
+* pictures.csv contains the keys (dates) and values (picture) for when pictures will be sent
 * README.md is this file you're reading right now
 * requirements.txt contains all the requirements you will need for this program
 * schedule.py handles working with the Google Calendar API and creating the body of the email
