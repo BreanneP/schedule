@@ -1,8 +1,8 @@
 import base64
-import csv
 import mimetypes
 import os
 from apiclient import errors, discovery
+from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
@@ -75,9 +75,3 @@ def send_message(creds, receiver, subject, msg_html, msg_plain, image):
     message = create_message_with_file(receiver, subject, msg_html, msg_plain, image)
     result = send_message_internal(service, 'me', message, receiver)
     return result
-
-
-def send_emails(creds, receivers, subject, msg_html, msg_plain, image):
-    receivers = receivers.split(' ')
-    for email in receivers:
-        send_message(creds, email, subject, msg_html, msg_plain, image)
